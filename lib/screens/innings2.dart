@@ -227,7 +227,11 @@ class _Innings2State extends State<Innings2> {
                       ),
                     ),
                     Text(
-                      ' (' + prov.curr_over + '/' + prov.overs.toString() + ')',
+                      ' (' +
+                          prov2.curr_over +
+                          '/' +
+                          prov.overs.toString() +
+                          ')',
                       style: TextStyle(
                         fontSize: 18,
                       ),

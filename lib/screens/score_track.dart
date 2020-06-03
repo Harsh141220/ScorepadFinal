@@ -739,24 +739,26 @@ class _ScoretrackState extends State<Scoretrack> {
           }
           alertcont.clear();
           Navigator.of(context).pop();
-          if (widget.inning == 1) {
-            if (double.parse(Provider.of<Inn1>(context).curr_over) ==
-                Provider.of<Inn1>(context).overs) {
-              Provider.of<Inn1>(context).curr_over = '0.0';
-              Navigator.of(context).pushReplacementNamed(Break.routeName);
-            } else if (Provider.of<Inn1>(context).balls % 6 == 0) {
-              Navigator.of(context)
-                  .pushReplacementNamed(ChangeBowler.routeName);
-            }
-          } else {
-            if (double.parse(Provider.of<Inn2>(context).curr_over) ==
-                    Provider.of<Inn2>(context).overs ||
-                0 >= Provider.of<Inn2>(context).target) {
-              Provider.of<Inn2>(context).curr_over = '0.0';
-              Navigator.of(context).pushReplacementNamed(EndResult.routeName);
-            } else if (Provider.of<Inn2>(context).balls % 6 == 0) {
-              Navigator.of(context)
-                  .pushReplacementNamed(ChangeBowler.routeName);
+          if (type != '1') {
+            if (widget.inning == 1) {
+              if (double.parse(Provider.of<Inn1>(context).curr_over) ==
+                  Provider.of<Inn1>(context).overs) {
+                Provider.of<Inn1>(context).curr_over = '0.0';
+                Navigator.of(context).pushReplacementNamed(Break.routeName);
+              } else if (Provider.of<Inn1>(context).balls % 6 == 0) {
+                Navigator.of(context)
+                    .pushReplacementNamed(ChangeBowler.routeName);
+              }
+            } else {
+              if (double.parse(Provider.of<Inn2>(context).curr_over) ==
+                      Provider.of<Inn2>(context).overs ||
+                  0 >= Provider.of<Inn2>(context).target) {
+                Provider.of<Inn2>(context).curr_over = '0.0';
+                Navigator.of(context).pushReplacementNamed(EndResult.routeName);
+              } else if (Provider.of<Inn2>(context).balls % 6 == 0) {
+                Navigator.of(context)
+                    .pushReplacementNamed(ChangeBowler.routeName);
+              }
             }
           }
         },

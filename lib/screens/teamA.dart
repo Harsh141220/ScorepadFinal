@@ -9,7 +9,6 @@ import '../providers/inn1.dart';
 import '../providers/inn2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class TeamA extends StatefulWidget {
   static const routeName = '/teamA';
   int n = 0;
@@ -101,32 +100,49 @@ class _TeamAState extends State<TeamA> {
                   Expanded(
                     child: ListView.builder(
                       itemCount: widget.n,
-                      itemBuilder: (ctx, index) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Card(
-                          child: ListTile(
-                            onTap: widget.n >= prov.no_of_players
-                                ? () {
+                      itemBuilder: (ctx, index) => Dismissible(
+                        direction: DismissDirection.endToStart,
+                        key: Key(prov.namesA[index]),
+                        background: Container(
+                          color: Colors.red,
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
+                        ),
+                        onDismissed: (right) {
+                          setState(() {
+                            widget.n--;
+                            prov.namesA.removeAt(index);
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Card(
+                            child: ListTile(
+                              onTap: widget.n >= prov.no_of_players
+                                  ? () {
                                       //_firestore.collection('Team 1').add({
-                                        //'Captain':capA
+                                      //'Captain':capA
 
                                       //});
-                                    setState(() {
-                                      prov.capA = prov.namesA[index];
-                                    });
-                                  }
-                                : () {},
-                            leading: Text(prov.namesA[index]),
-                            //title: Text(index.toString()),
-                            trailing: prov.capA == null
-                                ? SizedBox(
-                                    width: 2,
-                                  )
-                                : prov.capA == prov.namesA[index]
-                                    ? Icon(Icons.copyright)
-                                    : SizedBox(
-                                        width: 2,
-                                      ),
+                                      setState(() {
+                                        prov.capA = prov.namesA[index];
+                                      });
+                                    }
+                                  : () {},
+                              leading: Text(prov.namesA[index]),
+                              //title: Text(index.toString()),
+                              trailing: prov.capA == null
+                                  ? SizedBox(
+                                      width: 2,
+                                    )
+                                  : prov.capA == prov.namesA[index]
+                                      ? Icon(Icons.copyright)
+                                      : SizedBox(
+                                          width: 2,
+                                        ),
+                            ),
                           ),
                         ),
                       ),
@@ -141,7 +157,8 @@ class _TeamAState extends State<TeamA> {
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Please enter a name.';
-                              }
+                              } else if (prov.namesA.contains(value))
+                                return value + ' already exists';
                               return null;
                             },
                             onSaved: (_) {
@@ -158,9 +175,10 @@ class _TeamAState extends State<TeamA> {
                             color: Colors.blue,
                             onPressed: () {
                               //_firestore.collection('Team 1').add({
-                                //'Players Name':namesA
+                              //'Players Name':namesA
                               //});
                               _key.currentState.validate();
+
                               if (_key.currentState.validate()) {
                                 if (prov.batteam == 'A') {
                                   Provider.of<Inn1>(context).addBatting(

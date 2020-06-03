@@ -11,7 +11,6 @@ import '../providers/player_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TeamB extends StatefulWidget {
-
   static const routeName = '/teamB';
   int n = 0;
   @override
@@ -101,33 +100,57 @@ class _TeamBState extends State<TeamB> {
                       itemBuilder: (ctx, index) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Card(
-                          child: ListTile(
-                            onTap: widget.n >=
-                                    Provider.of<Content>(context).no_of_players
-                                ? () {
-                                       // _firestore.collection('Team 2').add({
-                                          //'Captain':capB
-                                        //});
-                                    setState(() {
-                                      Provider.of<Content>(context).capB =
-                                          Provider.of<Content>(context)
-                                              .namesB[index];
-                                    });
-                                  }
-                                : () {},
-                            leading: Text(
+                          child: Dismissible(
+                            direction: DismissDirection.endToStart,
+                            key: Key(
                                 Provider.of<Content>(context).namesB[index]),
-                            trailing: Provider.of<Content>(context).capB == null
-                                ? SizedBox(
-                                    width: 2,
-                                  )
-                                : Provider.of<Content>(context).capB ==
-                                        Provider.of<Content>(context)
-                                            .namesB[index]
-                                    ? Icon(Icons.copyright)
-                                    : SizedBox(
-                                        width: 2,
-                                      ),
+                            background: Container(
+                              color: Colors.red,
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                                semanticLabel: 'Delete',
+                              ),
+                            ),
+                            onDismissed: (right) {
+                              setState(() {
+                                widget.n--;
+                                Provider.of<Content>(context)
+                                    .namesB
+                                    .removeAt(index);
+                                print(Provider.of<Content>(context).namesB);
+                              });
+                            },
+                            child: ListTile(
+                              onTap: widget.n >=
+                                      Provider.of<Content>(context)
+                                          .no_of_players
+                                  ? () {
+                                      // _firestore.collection('Team 2').add({
+                                      //'Captain':capB
+                                      //});
+                                      setState(() {
+                                        Provider.of<Content>(context).capB =
+                                            Provider.of<Content>(context)
+                                                .namesB[index];
+                                      });
+                                    }
+                                  : () {},
+                              leading: Text(
+                                  Provider.of<Content>(context).namesB[index]),
+                              trailing:
+                                  Provider.of<Content>(context).capB == null
+                                      ? SizedBox(
+                                          width: 2,
+                                        )
+                                      : Provider.of<Content>(context).capB ==
+                                              Provider.of<Content>(context)
+                                                  .namesB[index]
+                                          ? Icon(Icons.copyright)
+                                          : SizedBox(
+                                              width: 2,
+                                            ),
+                            ),
                           ),
                         ),
                       ),
@@ -143,6 +166,10 @@ class _TeamBState extends State<TeamB> {
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Please enter a name.';
+                              } else if (Provider.of<Content>(context)
+                                  .namesB
+                                  .contains(value)) {
+                                return value + ' already exists';
                               }
                               return null;
                             },
@@ -159,8 +186,8 @@ class _TeamBState extends State<TeamB> {
                             ),
                             color: Colors.blue,
                             onPressed: () {
-                             // _firestore.collection('Team 2').add({
-                                //'Name of Team Player ': namesB
+                              // _firestore.collection('Team 2').add({
+                              //'Name of Team Player ': namesB
                               //});
                               _key.currentState.validate();
                               if (_key.currentState.validate()) {

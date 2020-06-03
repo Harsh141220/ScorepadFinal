@@ -8,6 +8,7 @@ import 'teamA.dart';
 import '../providers/inn1.dart';
 import '../providers/inn2.dart';
 import 'imageview360.dart';
+
 class Toss extends StatefulWidget {
   static const routeName = '/score';
 
@@ -68,6 +69,7 @@ class _TossState extends State<Toss> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     SizedBox(
@@ -317,8 +319,8 @@ class _TossState extends State<Toss> {
                                   _firestore.collection('Team').add({
                                     'Team 1 Name ': teamA,
                                     'Team 2 Name ': teamB,
-                                    'Bat Team ':toss_win,
-                                    'No of Overs':  overs,
+                                    'Bat Team ': toss_win,
+                                    'No of Overs': overs,
                                     'No of Players': no_of_players,
                                     'Toss Won ': toss_win
                                   });

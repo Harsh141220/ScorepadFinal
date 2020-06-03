@@ -20,7 +20,7 @@ class Inn2 with ChangeNotifier {
   int runs = 0;
   int undo_0 = 0;
   int balls = 0;
-  String curr_over;
+  String curr_over = '0.0';
   double overs;
   int undo_r = 0;
   bool isWicket = false;
