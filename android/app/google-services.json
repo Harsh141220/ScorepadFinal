@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "349174688407",
+    "firebase_url": "https://scorepadcopy2.firebaseio.com",
+    "project_id": "scorepadcopy2",
+    "storage_bucket": "scorepadcopy2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349174688407:android:aaec8de230be01a0a297d2",
+        "android_client_info": {
+          "package_name": "com.harsh.scorepad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349174688407-7p6i4jdjp41sfmv1rj3v9htmkcg2b95f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTyppxKjJrxcYH7oD-ZkF2XKkZwaWm4lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349174688407-7p6i4jdjp41sfmv1rj3v9htmkcg2b95f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
