@@ -114,6 +114,13 @@ class _TeamAState extends State<TeamA> {
                           setState(() {
                             widget.n--;
                             prov.namesA.removeAt(index);
+                            if (prov.batteam == 'A') {
+                              Provider.of<Inn1>(context).bat.removeAt(index);
+                              Provider.of<Inn2>(context).bowl.removeAt(index);
+                            } else {
+                              Provider.of<Inn2>(context).bat.removeAt(index);
+                              Provider.of<Inn1>(context).bowl.removeAt(index);
+                            }
                           });
                         },
                         child: Padding(

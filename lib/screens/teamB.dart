@@ -118,7 +118,22 @@ class _TeamBState extends State<TeamB> {
                                 Provider.of<Content>(context)
                                     .namesB
                                     .removeAt(index);
-                                print(Provider.of<Content>(context).namesB);
+                                if (Provider.of<Content>(context).batteam ==
+                                    'B') {
+                                  Provider.of<Inn1>(context)
+                                      .bat
+                                      .removeAt(index);
+                                  Provider.of<Inn2>(context)
+                                      .bowl
+                                      .removeAt(index);
+                                } else {
+                                  Provider.of<Inn2>(context)
+                                      .bat
+                                      .removeAt(index);
+                                  Provider.of<Inn1>(context)
+                                      .bowl
+                                      .removeAt(index);
+                                }
                               });
                             },
                             child: ListTile(
