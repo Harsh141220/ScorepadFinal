@@ -184,7 +184,6 @@ class _Innings1State extends State<Innings1> {
                         fontSize: 18,
                       ),
                     ),
-                    Text(prov.total.toString()),
                   ],
                 ),
               ),
